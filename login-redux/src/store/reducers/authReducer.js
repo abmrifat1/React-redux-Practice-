@@ -15,10 +15,12 @@ const authReducer = (state = init, action) => {
         error: {}
       };
     }
-    case Types.USERS_ERROR: {
+    case Types.GET_USER: {
       return {
         ...state,
-        error: action.payload.error
+        user: action.payload.user,
+        isAuthenticated: true,
+        error: "no error"
       };
     }
     default:

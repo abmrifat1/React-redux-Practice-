@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { register } from "../store/actions/auhAction";
+import { register } from "../store/actions/authAction";
 
 class Register extends React.Component {
   state = {
-    name: "abm",
+    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
     error: {}
   };
 
@@ -19,10 +18,11 @@ class Register extends React.Component {
   submitHandler = event => {
     event.preventDefault();
     let { email, name, password } = this.state;
-    this.props.register({ name, email, password });
+    this.props.register({ name, email, password }, this.props.history);
   };
   render() {
-    let { name, email, password, error } = this.state;
+    let { name, email, password } = this.state;
+    console.log(this.props);
     return (
       <div className="container">
         <div className="row">
@@ -39,46 +39,34 @@ class Register extends React.Component {
                   value={name}
                   onChange={this.changeHandler}
                   className="form-control"
+                  required
                 />
-                {/* {error.name && (
-                <div className="invalid-feedback">{error.name}</div>
-              )} */}
               </div>
               <div className="form-group">
                 <label htmlFor="email"> Email: </label>
                 <input
                   type="email"
-                  // className={
-                  //   error.email ? "form-control is-invalid" : "form-control"
-                  // }
                   placeholder="Enter Your Email"
                   name="email"
                   id="email"
                   value={email}
                   onChange={this.changeHandler}
                   className="form-control"
+                  required
                 />
-                {/* {error.email && (
-                <div className="invalid-feedback">{error.email}</div>
-              )} */}
               </div>
               <div className="form-group">
                 <label htmlFor="password"> Password: </label>
                 <input
                   type="password"
-                  // className={
-                  //   error.password ? "form-control is-invalid" : "form-control"
-                  // }
                   placeholder="Enter Your Password"
                   name="password"
                   id="password"
                   value={password}
                   onChange={this.changeHandler}
                   className="form-control"
+                  required
                 />
-                {/* {error.password && (
-                <div className="invalid-feedback">{error.password}</div>
-              )} */}
               </div>
 
               <Link to="/login">Already Have Account? Login Here</Link>
