@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { register } from "../store/actions/auhAction";
 
 class Register extends React.Component {
   state = {
-    name: "",
+    name: "abm",
     email: "",
     password: "",
     confirmPassword: "",
@@ -16,9 +18,11 @@ class Register extends React.Component {
 
   submitHandler = event => {
     event.preventDefault();
+    let { email, name, password } = this.state;
+    this.props.register({ name, email, password });
   };
   render() {
-    let { name, email, password, confirmPassword, error } = this.state;
+    let { name, email, password, error } = this.state;
     return (
       <div className="container">
         <div className="row">
@@ -86,4 +90,4 @@ class Register extends React.Component {
     );
   }
 }
-export default Register;
+export default connect(null, { register })(Register);
